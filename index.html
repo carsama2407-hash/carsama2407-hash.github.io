@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Persona Favorita</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="hearts-container" id="hearts-container"></div>
+
+    <main class="content">
+        <h1 class="romantic-title">¡Feliz San Valentín, Gordita!</h1>
+
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="card"><img src="./img/imagen1.jpeg" alt="Foto 1"></div>
+                <div class="card"><img src="./img/imagen2.jpeg" alt="Foto 2"></div>
+                <div class="card"><img src="./img/imagen3.jpeg" alt="Foto 3"></div>
+                <div class="card"><img src="./img/imagen4.jpeg" alt="Foto 4"></div>
+                <div class="card"><img src="./img/imagen5.jpeg" alt="Foto 5"></div>
+                <div class="card"><img src="./img/imagen6.jpeg" alt="Foto 6"></div>
+            </div>
+            <div class="carousel-controls">
+                <button id="prev">❮</button>
+                <button id="next">❯</button>
+            </div>
+        </div>
+
+        <section class="love-letter">
+            <div class="paper">
+                <h2>Para mi gordita</h2>
+                <p>Hola mi amor lindo, se que a pesar de querer estar este día juntos es muy difícil que nos veamos, pero quiero que sepas que no importa la distancia te amo con todo mi corazón y siempre trataré de demostrarte lo mucho que te amo con detallitos como el que te llego esta mañana. Y se que estos no han sido los mejores días de la relación pero siempre trataré de demostrarte lo mucho que me importas y que quiero pasar todos los días de mi vida contigo. 
+                    <br>A pesar de la distancia siempre te llevo en corazón y en mi mente, no hay momento en el que no esté pensando en ti, te amo mucho mi gordita, sabes que te mando un abrazo lleno de amor y muchos besos.
+                    <br>Y como dice la palabra de Dios "Cuando ella ora por él y él ora por ella, Dios hace que todo sea posible" y tú nunca sales de mis oraciones amor lindo.</p>
+                <p class="signature">Con amor, tu novio que te ama muchísimo ❤️</p>
+            </div>
+        </section>
+
+        <div class="player-container">
+    <div class="music-card">
+        <div class="top-bar">
+            <span>&or;</span>
+            <span>Now Playing</span>
+            <span>•••</span>
+        </div>
+
+        <div class="img-area">
+            <img src="./img/imagen1.jpeg" alt="Portada de la canción" id="track-art">
+        </div>
+
+        <div class="song-details">
+            <p class="name" id="track-name">Simplemente Gracias </p>
+            <p class="artist" id="track-artist">Calibre 50</p>
+        </div>
+
+        <div class="progress-area">
+            <div class="progress-bar">
+                <audio id="main-audio" src="./img/cancion1.mp3"></audio>
+                <div id="progress-current"></div>
+            </div>
+            <div class="timer">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <i class="btn-secondary">🔁</i>
+            <i id="prev" class="btn-skip">⏮</i>
+            <div class="play-pause" onclick="togglePlay()">
+                <span id="play-icon">▶</span>
+            </div>
+            <i id="next" class="btn-skip">⏭</i>
+            <i class="btn-secondary">≡</i>
+        </div>
+    </div>
+</div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
