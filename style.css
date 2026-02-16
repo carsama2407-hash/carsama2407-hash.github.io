@@ -228,4 +228,32 @@ body {
     transition: 0.3s;
 }
 
+
 .btn-secondary { color: #ccc; }
+
+.btn-rose {
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #ff4d6d, #c9184a);
+    color: white;
+    text-decoration: none; /* Quita el subrayado del link */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    box-shadow: 0 10px 20px rgba(201, 24, 74, 0.3);
+    transition: all 0.3s ease; /* Para que el efecto sea suave */
+    cursor: pointer;
+}
+
+/* Efecto cuando pasas el mouse por encima */
+.btn-rose:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 25px rgba(201, 24, 74, 0.4);
+    background: linear-gradient(135deg, #ff758f, #ff4d6d);
+}
+
+/* Efecto cuando haces clic */
+.btn-rose:active {
+    transform: translateY(0);
+}
