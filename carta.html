@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <title>Card</title>
+    <style>
+      /* --- ESTILOS DE LA CARTA --- */
+      .letter-section {
+        display: flex;
+        justify-content: center;
+        padding: 60px 20px;
+      }
+
+      .antique-paper {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        background-color: #f4e4bc;
+        background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+        padding: 50px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        border: 1px solid #d2b48c;
+        transform: rotate(-1deg);
+      }
+
+      .letter-title {
+        font-family: "Great Vibes", cursive;
+        color: #5d4037;
+        font-size: 2.5rem;
+      }
+      .letter-text {
+        font-family: "Dancing Script", cursive;
+        font-size: 1.4rem;
+        color: #3e2723;
+      }
+
+      /* Sello de cera (El detalle extra) */
+.wax-seal {
+    position: absolute;
+    bottom: -20px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background: #b22222;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 25px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    border: 3px solid #8b0000;
+    transform: rotate(10deg);
+    z-index: 2;
+}
+
+      /* Botón dentro de la carta */
+      .button-container {
+        text-align: center;
+        margin-top: 30px;
+      }
+      .btn-estelar {
+        background: #5d4037;
+        color: #f4e4bc;
+        border: none;
+        padding: 10px 20px;
+        font-family: "Montserrat", sans-serif;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn-estelar:hover {
+        background: #3e2723;
+        transform: scale(1.05);
+      }
+
+      /* --- ESTILOS DEL MODAL ESTELAR --- */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        overflow-y: auto;
+      }
+
+      .modal-content {
+        background: #000;
+        margin: 20px auto;
+        width: 90%;
+        max-width: 550px;
+        border: 2px solid #fff;
+        padding: 20px;
+        position: relative;
+      }
+
+      .close-button {
+        color: white;
+        font-size: 30px;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        cursor: pointer;
+      }
+
+      /* Recreación Mapa Estelar */
+      .carta-estelar-replic {
+        text-align: center;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 15px;
+      }
+      .mapa-container {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 1px solid white;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+      .imagen-mapa {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .nombres {
+        font-family: "Great Vibes", cursive;
+        font-size: 2.2rem;
+        margin: 10px 0;
+      }
+      .dedicatoria-estelar {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        padding: 0 20px;
+        font-style: italic;
+      }
+      .te-amo {
+        font-family: "Great Vibes", cursive;
+        font-size: 1.8rem;
+        color: #fff;
+      }
+      .detalles-ubicacion {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        margin-top: 15px;
+      }
+
+      /* --- CARRUSEL INFINITO (CINTA) --- */
+      .carrusel-cinta-wrapper {
+        overflow: hidden;
+        width: 100%;
+        margin-top: 30px;
+        padding: 10px 0;
+        border-top: 1px solid white;
+      }
+
+      .carrusel-track {
+        display: flex;
+        width: calc(150px * 8); /* Ajustar según ancho de fotos */
+        animation: cintaInfinita 12s linear infinite;
+      }
+
+      .polaroid {
+        width: 130px;
+        height: 150px;
+        background: white;
+        padding: 5px 5px 20px 5px; /* Efecto marco de foto */
+        margin: 0 10px;
+      }
+
+      .polaroid img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+      }
+
+      @keyframes cintaInfinita {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(calc(-150px * 4));
+        } /* Mueve el ancho de un set */
+      }
+
+/* --- Estilos para todo el Modal Content --- */
+.modal-content {
+    /* ... tus estilos existentes ... */
+    background: #000; /* Fondo negro total */
+    position: relative; /* Importante para posicionar estrellas */
+    overflow: hidden; /* Para que las estrellas no se salgan del modal */
+    z-index: 10;
+}
+
+/* --- Estrellas Fijas por todo el Modal Content --- */
+.static-star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+/* Estrellas que brillan mucho */
+.static-star.bright {
+    box-shadow: 0 0 10px 2px white;
+    background: #fff;
+}
+
+/* Estrellas que brillan poco */
+.static-star.dim {
+    opacity: 0.4;
+    transform: scale(0.7);
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.4; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* --- Estrellas Fugaces (Caída de arriba hacia abajo) --- */
+.shooting-star {
+    position: absolute;
+    width: 2px;
+    height: 100px; /* Longitud de la estela */
+    background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    pointer-events: none;
+    z-index: 11; /* Por encima de las estrellas fijas */
+    /* Rotación para apuntar hacia ABAJO y DERECHA */
+    transform: rotate(0deg);
+}
+
+/* Animación para que caiga de arriba hacia abajo y derecha */
+@keyframes shootingStarFall {
+    0% {
+        /* Empieza en su posición inicial (arriba), ya rotada */
+        transform: translate(0, 0) rotate(140deg);
+        opacity: 1;
+    }
+    100% {
+        /* Se mueve hacia abajo y hacia la derecha, manteniendo la rotación y desvaneciéndose */
+        transform: translate(400px, 400px) rotate(140deg);
+        opacity: 0;
+    }
+}
+
+/* Rotación lenta del mapa (opcional) */
+.imagen-mapa {
+    animation: rotateSlow 180s linear infinite;
+    opacity: 0.7; /* Para que las estrellas fijas se vean mejor sobre ella */
+}
+
+@keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+    </style>
+  </head>
+  <body>
+    <section class="letter-section">
+      <div class="antique-paper">
+        <div class="wax-seal">❤</div>
+        <div class="letter-content">
+          <h2 class="letter-title">Para mi gordita, felices 6 mesesitos</h2>
+          <p class="letter-text">
+            Hace 6 meses comenzó nuestra relación de novios, y aunque hoy me encantaría estar disfrutando el día contigo siempre hay circunstancias que no lo permiten, pero prometo que aunque estamos lejos el uno del otro siempre voy a amarte e intentar que mi amor te llegue como esta vez, con estos detalles y también que las cosas mejoraran y podremos celebrar juntos en el futuro. <br>
+
+No hay palabras para describir lo mucho que te amo y lo agradecido que estoy de poder estar contigo todo este tiempo. Doy gracias a Dios porque sé que es Él quien nos ha unido y quien guía nuestro camino. Sé que no todo ha sido perfecto en la relación y que no soy el mejor hombre, pero quiero que sepas que siempre te pienso y pido porque estés bien, porque te amo más que nada en este mundo. Gracias por iluminar mi vida y por quererme. <br>
+
+No me puedo imaginar cómo sería mi vida sin ti… Se sentiría vacía, oscura, sin rumbo. Porque tú eres mi luz, eres quien le da brillo a todo lo que soy. Sin ti, nada sería igual. Por eso cada día le pido a Dios que nos permita seguir construyendo esto tan bonito que tenemos, que nos dé la fuerza para superar cualquier obstáculo y seguir creciendo juntos. <br>
+ 
+Quiero que sepas que mi amor es inmenso como el universo y tan grande que no le encuentro fin. Es un amor que crece con el tiempo, que se fortalece con cada dificultad y que se hace más grande con cada recuerdo que creamos. Te amo en tus días buenos y también en los no tan buenos, te amo con tus virtudes y tus imperfecciones, porque todo en ti es perfecto para mí.  <br>
+Gracias por ser tú, por tu paciencia, por tu cariño, por tu forma de amar. Gracias por elegirme todos los días y por dejarme ser parte de tu vida. Yo prometo nunca dejar de recordarte lo importante que eres para mí y lo mucho que te amo.
+<br>
+Felices 6 meses, mi gordita hermosa. Esto es solo el comienzo de todo lo que quiero vivir contigo, te amo mi princesita. 🤍
+          </p>
+        </div>
+
+        <div class="button-container">
+          <button id="abrirModal" class="btn-estelar">
+            ✨ Ver Nuestra Estrella
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div id="modalEstelar" class="modal">
+      <div class="modal-content">
+        <span class="close-button" id="cerrarModal">&times;</span>
+
+        <div class="carta-estelar-replic">
+          <div class="mapa-container">
+            <img
+              src="img/mapa_estelar.png"
+              alt="Mapa Estelar"
+              class="imagen-mapa"
+            />
+            <div class="mapa-overlay"></div>
+          </div>
+
+          <div class="textos-estelares">
+            <p class="nombres">Andres & Maria</p>
+            <p class="dedicatoria-estelar">
+              Así se veía el cielo aquella noche en la que nuestras miradas dijeron lo que el corazón ya sabía. Entre millones de estrellas, el universo fue testigo del instante exacto en que mi vida cambió para siempre, porque tú te convertiste en la estrella más brillante de mi cielo y pasaste a ser la constelación que guía mis pasos, mi deseo más pedido y mi destino.
+            </p>
+            <p class="te-amo">Te Amo</p>
+            <div class="detalles-ubicacion">
+              <p>MONTERÍA - CÓRDOBA</p>
+              <p>03 DE OCTUBRE DEL 2025</p>
+            </div>
+          </div>
+
+          <div class="carrusel-cinta-wrapper">
+            <div class="carrusel-track">
+              <div class="polaroid"><img src="img/imagen1.jpeg" /></div>
+              <div class="polaroid"><img src="img/imagen2.jpeg" /></div>
+              <div class="polaroid"><img src="img/imagen3.jpeg" /></div>
+              <div class="polaroid"><img src="img/imagen4.jpeg" /></div>
+              <div class="polaroid"><img src="img/imagen5.jpeg" /></div>
+              <div class="polaroid"><img src="img/imagen6.jpeg" /></div>
+              <div class="polaroid"><img src="img/imagen1.jpeg" /></div>
+              <div class="polaroid"><img src="img/imagen1.jpeg" /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    // Lógica para el Modal del Mapa Estelar
+const modalEstelar = document.getElementById('modalEstelar');
+const btnAbrirEstelar = document.getElementById('abrirModal');
+const btnCerrarEstelar = document.getElementById('cerrarModal');
+
+btnAbrirEstelar.onclick = function() {
+    modalEstelar.style.display = "block";
+    document.body.style.overflow = "hidden"; // Bloquea el scroll de la página
+}
+
+btnCerrarEstelar.onclick = function() {
+    modalEstelar.style.display = "none";
+    document.body.style.overflow = "auto"; // Libera el scroll
+}
+
+window.onclick = function(event) {
+    if (event.target == modalEstelar) {
+        modalEstelar.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+}
+
+// --- Lógica del Cielo Estrellado en el Modal Content ---
+const modalContent = document.querySelector('.modal-content'); // Selecciona todo el contenedor de contenido
+
+// 1. Crear estrellas estáticas (titilantes) por todo el modal
+function createStaticStars() {
+    for (let i = 0; i < 150; i++) { // Más estrellas para cubrir más área
+        const star = document.createElement('div');
+        star.classList.add('static-star');
+        
+        // Posición aleatoria
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        
+        // Tamaño y brillo aleatorio
+        const size = Math.random() * 3 + 1; // Unas más grandes que otras
+        const delay = Math.random() * 5; // Para que no brillen todas a la vez
+        const brightnessClass = Math.random() > 0.5 ? 'bright' : 'dim'; // Unas brillan más, otras menos
+        
+        star.classList.add(brightnessClass);
+        star.style.left = `${x}%`;
+        star.style.top = `${y}%`;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.animationDelay = `${delay}s`;
+        
+        modalContent.appendChild(star);
+    }
+}
+
+// 2. Crear estrellas fugaces (que caen de arriba hacia abajo)
+function createShootingStar() {
+    const star = document.createElement('div');
+    star.classList.add('shooting-star');
+    
+    // Posición inicial aleatoria en la parte SUPERIOR del modal
+    const startX = Math.random() * modalContent.offsetWidth;
+    const startY = -20; // Empieza justo arriba del borde visible
+
+    star.style.left = `${startX}px`;
+    star.style.top = `${startY}px`;
+
+    // Animación: cae en diagonal hacia ABAJO y DERECHA
+    // Aumentamos la distancia para que cruce más el modal
+    const fallDuration = Math.random() * 2 + 1; // Duración aleatoria entre 1 y 3 segundos
+    // Usamos una trayectoria de caída diagonal más pronunciada
+    star.style.animation = `shootingStarFall ${fallDuration}s linear forwards`;
+
+    modalContent.appendChild(star);
+
+    // Elimina la estrella después de la animación
+    setTimeout(() => {
+        star.remove();
+    }, fallDuration * 1000);
+}
+
+// Inicializar cuando se abre el modal (se llama desde la función btnAbrir.onclick)
+function startModalBackground() {
+    // Evitar duplicar estrellas si ya se abrió
+    if (modalContent.querySelector('.static-star')) return; 
+    createStaticStars();
+    setInterval(createShootingStar, 2000); // Crea una cada 2 segundos
+}
+
+// --- Integrar con tu lógica existente de abrir/cerrar modal ---
+// (Modifica tu código existente así:)
+btnAbrirEstelar.onclick = function() {
+    modalEstelar.style.display = "block";
+    document.body.style.overflow = "hidden";
+    startModalBackground(); // Iniciar el fondo estrellado
+}
+  </script> 
+</html>
